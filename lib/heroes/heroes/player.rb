@@ -16,7 +16,8 @@ module Heroes
   class Player
     attr_accessor :battleNetRegionId, :battleNetSubId, :battleNetId,
                   :color, :winner, :name, :battleTag, :player_type, :team, :handicap,
-                  :auto_select, :character, :character_level, :talents
+                  :auto_select, :character, :character_level, :talents,
+                  :auto_select
 
 
     def initialize(data, attributes = nil) 

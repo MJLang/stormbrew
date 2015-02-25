@@ -35,7 +35,13 @@ module MPQ
     end
 
     def read_file(filename)
-      get_hash_table_entry(filename).decompressed_data
+      ht_entry = get_hash_table_entry(filename)
+      ht_entry.decompressed_data
+    end
+
+    def read_raw(filename)
+      ht_entry = get_hash_table_entry(filename)
+      ht_entry.get_file_data
     end
 
     def get_hash_table_entry(filename)
@@ -43,7 +49,7 @@ module MPQ
       hash_b = BlockEncryptor.hash_string(filename, 0x200)
 
       block = self.block_table.blocks[self.hash_table.hashes.select {|hash| hash.file_path_hash_a == hash_a && hash.file_path_hash_b == hash_b}.first.file_block_index]
-      self.file_data.select {|f| f.block_offset == block.block_offset}.first
+      result = self.file_data.select {|f| f.block_offset == block.block_offset}.first
     end
   end
 end

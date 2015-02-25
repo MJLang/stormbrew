@@ -1,5 +1,6 @@
 require 'zlib'
 require 'rbzip2'
+require 'rbzip2/ffi'
 require 'stringio'
 
 module MPQ
@@ -31,13 +32,38 @@ module MPQ
         if block.flags & MPQ_COMPRESSED && block.file_size > block.block_size
           result = decompress(self.data)
         end
-      else
+      end
+
+      result
+    end
+
+    def get_file_data
+      result = nil
+      block = eval_parameter(:block)
+
+      if (block.flags & MPQ_FILE_EXISTS) > 0
+        result = self.data
+      end
+
+      if (block.flags & MPQ_FILE_ENCRYPTED) > 0
+        raise NotImplementedError
+      end
+
+      if (block.flags & MPQ_SINGLE_UNIT) > 0
+        if block.flags & MPQ_COMPRESSED && block.file_size > block.block_size
+          result = get_file(self.data)
+        end
       end
 
       result
     end
 
     private
+
+    def get_file(data)
+      loaded_data = StringIO.new(data[1,data.size - 1])
+    end
+    
     def decompress(data)
       compression_type = data.bytes.first
       case compression_type
@@ -46,7 +72,8 @@ module MPQ
       when 2
         Zlib::Deflate.deflate(data[1,data.size - 1])
       when 16
-        RBzip2::Decompressor.new(StringIO.new(data[1,data.size - 1])).read
+        loaded_data = StringIO.new(data[1,data.size - 1])
+        RBzip2::FFI::Decompressor.new(loaded_data).read
       else
         raise NotImplementedError
       end

@@ -17,15 +17,10 @@ module Heroes
       self.build = mpq_header.data[1][4]
       self.attributes = Attributes.read(self.mpq.read_file('replay.attributes.events'))
       self.details = Details.read(self.mpq.read_file('replay.details'))
-
       self.map = self.details.data[1]
       self.players = self.details.data[0].map { |p| Heroes::Player.new(p) }
       self.timestamp = Time.from_wtime(self.details.data[5])
-      AttributeEvents.parseAttributes(self, self.attributes.attributes)
+      GameAttributes.parseAttributes(self, self.attributes.attributes)
     end
-
-    # def mpq
-    #   @mpq
-    # end
   end
 end
