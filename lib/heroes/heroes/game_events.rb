@@ -15,7 +15,10 @@ module Heroes
   end
 
   class Events
-    def self.parse(stream, replay)
+    def self.parse(replay, stream)
+      if stream.is_a?(String)
+        stream = StringIO.new(stream)
+      end
       events = []
       reader = Heroes::BitReader.new(stream)
 

@@ -21,6 +21,7 @@ module Heroes
       self.players = self.details.data[0].map { |p| Heroes::Player.new(p) }
       self.timestamp = Time.from_wtime(self.details.data[5])
       GameAttributes.parseAttributes(self, self.attributes.attributes)
+      Events.parse(self, self.mpq.read_file('replay.game.events'))
     end
   end
 end
