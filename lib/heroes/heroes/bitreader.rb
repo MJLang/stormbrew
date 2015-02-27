@@ -45,20 +45,21 @@ module Heroes
       bytes.times do
         byte_array << @stream.getbyte
       end
-      return byte_array
+      byte_array
     end
+
     def read_string(bit_length)
 
     end
 
-    def read_boolean()
+    def read_boolean
       self.read(1) == 1
     end
 
     def read_blob_with_length(num_bits_for_length)
       string_length = self.read(num_bits_for_length)
       self.align_to_byte
-      return read_bytes(string_length)
+      read_bytes(string_length)
     end
   end
 end
