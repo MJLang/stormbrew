@@ -147,6 +147,7 @@ module Heroes
           {uint: reader.read(1)},
           {uint: reader.read(1)},
           {uint: reader.read(1)},
+          {uint: reader.read(1)},
           {uint: reader.read(32)},
           {uint: reader.read(32)},
           {uint: reader.read(32)},
@@ -223,14 +224,20 @@ module Heroes
         when 1
           event.data[:array][2] = {array: [{uint: reader.read(20)}, {uint: reader.read(20)}, {vint: reader.read(32) - 2147483648}]}
         when 2
-          event.data[:array][2] = {array: [{uint: reader.read(16)}, {uint: reader.read(8)}, {uint: reader.read(32)}, {uint: reader.read(16)}, {}, {}, {}]}
+          event.data[:array][2] = {array: [{uint: reader.read(16)}, 
+                                           {uint: reader.read(8)}, 
+                                           {uint: reader.read(32)}, 
+                                           {uint: reader.read(16)}, 
+                                           {}, {}, {}]}
           if reader.read_boolean
             event.data[:array][2][:array][4][:uint] = reader.read(4)
           end
           if reader.read_boolean
             event.data[:array][2][:array][5][:uint] = reader.read(4)
           end
-          event.data[:array][2][:array][6] = {array: [{uint: reader.read(20)}, {uint: reader.read(20)}, {vint: reader.read(32) - 2147483648}]}
+          event.data[:array][2][:array][6] = {array: [{uint: reader.read(20)}, 
+                                                      {uint: reader.read(20)}, 
+                                                      {vint: reader.read(32) - 2147483648}]}
         when 3
           event.data[:array][2] = {uint: reader.read(32)}
       end
@@ -252,7 +259,7 @@ module Heroes
       case reader.read(2)
         when 0
         when 1
-          reader.read(reader.read(3))
+          reader.read(reader.read(9))
         when 2, 3
           event.data[:array][1][:array][1] = {array: []}
           holder = reader.read(9)
@@ -540,7 +547,8 @@ module Heroes
     def self.assign_talents(replay, talent_events)
       grouped_events = talent_events.group_by {|e| e.player_index }
       grouped_events.each do |k, v|
-        replay.players[k].talents = v.collect {|value| value.data[:uint] }
+        talent_set = v.collect {|value| value.data[:uint] }
+        replay.players[k].talents = Talent.parse_set(replay.players[k].character, talent_set, replay.build)
       end
     end
   end

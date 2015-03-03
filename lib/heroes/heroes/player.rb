@@ -31,6 +31,10 @@ module Heroes
       @winner = data[8] == 1
       @character = data[10]
     end
+
+    def get_talents(character, talents, build)
+      
+    end
   end 
 end
 
