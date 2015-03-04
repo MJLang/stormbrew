@@ -32,7 +32,7 @@ module Heroes
       @character = data[10]
     end
 
-    def get_talents(character, talents, build)
+    def get_talents(talent_ids, build)
       
     end
   end 
