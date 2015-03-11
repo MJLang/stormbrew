@@ -14,17 +14,17 @@
 
 module Heroes
   class Player
-    attr_accessor :battleNetRegionId, :battleNetSubId, :battleNetId,
-                  :color, :winner, :name, :battleTag, :player_type, :team, :handicap,
+    attr_accessor :battle_net_region_id, :battle_net_sub_id, :battle_net_id,
+                  :color, :winner, :name, :player_type, :team, :handicap,
                   :auto_select, :character, :character_level, :talents,
                   :auto_select
 
 
     def initialize(data, attributes = nil) 
       @name = data[0]
-      @battleNetRegionid = data[1][0]
-      @battleNetSubId = data[1][2]
-      @battleNetId = data[1][4]
+      @battle_net_region_id = data[1][0]
+      @battle_net_sub_id = data[1][2]
+      @battle_net_id = data[1][4]
       @color = data[3].values
       @team = data[5]
       @handicap = data[6]
@@ -34,6 +34,10 @@ module Heroes
 
     def get_talents(talent_ids, build)
       
+    end
+
+    def battle_tag
+      "#{@name}##{@battle_net_id}"
     end
   end 
 end
