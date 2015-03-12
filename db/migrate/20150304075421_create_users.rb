@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email, unique: true, null: false
       t.string :password_digest
       t.string :display_name
+      t.integer :login_count, default: 0
       t.datetime :last_login
       t.string :password_reset_token
       t.datetime :reset_token_issued_at

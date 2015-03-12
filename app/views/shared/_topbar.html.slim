@@ -1,0 +1,15 @@
+nav.top-bar data-topbar='' role='navigation'
+  ul.title-area
+    li.name
+      h1 
+        = link_to 'Stormbrew', root_path
+  section.top-bar-section
+    ul.right
+      - if !is_logged_in?
+        li 
+          = link_to 'Login', '#'
+        li 
+          = link_to 'Register', '#'
+      - else
+        li
+          = link_to current_user.display_name, '#'

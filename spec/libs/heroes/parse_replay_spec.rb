@@ -31,7 +31,7 @@ RSpec.describe Heroes do
     end
 
     it "should have a battleNetId" do
-      expect(winning_player.battleNetId).to eq(251258)
+      expect(winning_player.battle_net_id).to eq(251258)
     end
   end
 end

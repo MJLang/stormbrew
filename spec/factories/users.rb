@@ -3,9 +3,10 @@
 # Table name: users
 #
 #  id                    :integer          not null, primary key
-#  email                 :string
+#  email                 :string           not null
 #  password_digest       :string
 #  display_name          :string
+#  login_count           :integer          default("0")
 #  last_login            :datetime
 #  password_reset_token  :string
 #  reset_token_issued_at :datetime
@@ -20,6 +21,7 @@ FactoryGirl.define do
     password_confirmation 'secret'
     display_name { Faker::Internet.user_name }
     last_login nil
+    login_count 0
     password_reset_token nil
     reset_token_issued_at nil
   end

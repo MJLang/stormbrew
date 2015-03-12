@@ -3,9 +3,10 @@
 # Table name: users
 #
 #  id                    :integer          not null, primary key
-#  email                 :string
+#  email                 :string           not null
 #  password_digest       :string
 #  display_name          :string
+#  login_count           :integer          default("0")
 #  last_login            :datetime
 #  password_reset_token  :string
 #  reset_token_issued_at :datetime
@@ -16,5 +17,11 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Helper Methods' do
+    let(:user) {FactoryGirl.create(:user)}
+    it '#update_login_count!' do
+      user.update_login_count!
+      expect(user.login_count).to eq(1)
+    end
+  end
 end
