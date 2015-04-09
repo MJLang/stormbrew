@@ -1,0 +1,19 @@
+.ui.modal {
+  &>header {
+    padding: $modal-header-padding
+  }
+
+  &>section {
+    padding: $modal-content-padding;
+  }
+
+
+}
+#loginTabAction h2, #registerTabAction h2 {
+  color: #aaa;
+  transition: color 0.35s;
+  &.active, &:hover {
+    transition: color 0.35s;
+    color: #000;
+  }
+}

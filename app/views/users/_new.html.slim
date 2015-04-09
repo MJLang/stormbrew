@@ -1,0 +1,22 @@
+= form_tag '/signup', method: :post, class: 'ui form', id: 'signupForm', remote: true do
+  .one.field
+    .required.field
+      label= t('sessions.signup.modal.display_name')
+      .ui.left.icon.input
+        = text_field_tag 'user[display_name]', '', placeholder: t('sessions.signup.modal.display_name'), 'required' => ''
+        i.user.icon
+  .one.field
+    .required.field
+      label= t('sessions.signup.modal.email')
+      .ui.left.icon.input
+        = email_field_tag 'user[email]', '', placeholder: t('sessions.signup.modal.email'), 'required' => ''
+        i.mail.outline.icon
+  .one.field
+    .required.field
+      label= t('sessions.signup.modal.password')
+      .ui.left.icon.input
+        = password_field_tag 'user[password]', '', placeholder: t('sessions.signup.modal.password'), 'required' => ''
+        i.lock.icon
+  = submit_tag 'Register', class: 'ui submit button'
+
+

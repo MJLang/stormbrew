@@ -16,10 +16,10 @@
 
 FactoryGirl.define do
   factory :user do
-    email { Faker::Internet.email }
+    email { FFaker::Internet.email }
     password 'secret'
     password_confirmation 'secret'
-    display_name { Faker::Internet.user_name }
+    display_name { FFaker::Internet.user_name }
     last_login nil
     login_count 0
     password_reset_token nil

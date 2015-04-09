@@ -1,0 +1,16 @@
+div.ui.modal.small#sessionModal
+  i.close.icon
+  header
+    div.ui.two.column.centered.grid
+      div.four.column.centered.row
+        div.column
+          = link_to '#', id: 'loginTabAction' do
+            h2.ui.header.centered Login
+        div.column
+          = link_to '#', id: 'registerTabAction' do
+            h2.ui.header.centered Register
+  section#loginTab
+    = render 'sessions/new'
+
+  section#registerTab
+    = render 'users/new'

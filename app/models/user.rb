@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true,
                     presence: true
+  validates :password, presence: true
+
+  validates :display_name, presence: true
+
 
   def update_login_count!
     self.last_login = DateTime.now.utc

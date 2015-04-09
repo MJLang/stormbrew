@@ -13,8 +13,12 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require foundation
 //= require turbolinks
+
+
+//= require semantic-ui
+//= require parsleyjs/parsley.remote
+//= require noty
+
 //= require_tree .
 
-$(function(){ $(document).foundation(); });

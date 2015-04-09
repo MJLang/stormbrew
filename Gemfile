@@ -22,22 +22,29 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.2'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'slim-rails'
-gem 'foundation-rails'
-gem 'typescript-rails'
+gem 'compass'
 
 gem 'sidekiq'
 gem 'warden'
+
+gem 'foreman'
 
 
 group :mpq do
   gem 'ffi'
   gem 'bindata'
   gem 'rbzip2', github: 'koraktor/rbzip2'
+end
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-semantic-ui'
+  gem 'rails-assets-parsleyjs'
+  gem 'rails-assets-noty'
 end
 
 # Use ActiveModel has_secure_password
@@ -63,7 +70,6 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'ffaker'

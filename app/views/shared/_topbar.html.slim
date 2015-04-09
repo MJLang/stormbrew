@@ -1,15 +1,26 @@
-nav.top-bar data-topbar='' role='navigation'
-  ul.title-area
-    li.name
-      h1 
-        = link_to 'Stormbrew', root_path
-  section.top-bar-section
-    ul.right
-      - if !is_logged_in?
-        li 
-          = link_to 'Login', '#'
-        li 
-          = link_to 'Register', '#'
-      - else
-        li
-          = link_to current_user.display_name, '#'
+div.container#topbar
+  div.ui.small.menu
+    = link_to root_path, class: 'item' do
+      i.home.icon
+      span Stormbrew
+    - if !is_logged_in?
+      div.right.menu
+        = link_to '#', class: 'item', id: 'login' do
+          span Login
+
+        = render 'shared/session'
+
+        = link_to '#', class: 'item', id: 'register' do
+          span Register
+    - else
+      div.right.menu
+        div.ui.dropdown.item#profileMenu
+          span.text= t('topbar.profile.title', {username: current_user.display_name})
+          i.dropdown.icon
+          div.menu
+            = link_to t('topbar.profile.profile'), '#', class: 'item'
+            = link_to t('topbar.profile.logout'), logout_path, method: :delete, class: 'item'
+          script
+            | jQuery(function() {
+            |  $("#profileMenu").dropdown();
+            | });

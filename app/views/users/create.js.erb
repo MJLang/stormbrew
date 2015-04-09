@@ -1,0 +1,17 @@
+<% if @user.persisted? %>
+  $("#sessionModal").modal('hide');
+  $("#topbar").replaceWith("<%= escape_javascript(render 'shared/topbar') %>");
+  noty({
+    text: "Successfully signed up!",
+    type: 'success',
+    layout: 'topRight',
+    timeout: 2000
+  });
+<% else %>
+  noty({
+    text: "We failed at creating your account - sorry!",
+    type: 'error',
+    layout: 'topRight',
+    timeout: 2000
+  });
+<% end %>

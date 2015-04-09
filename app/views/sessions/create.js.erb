@@ -1,0 +1,17 @@
+<% if @user %>
+  $("#sessionModal").modal('hide');
+  $("#topbar").replaceWith("<%= escape_javascript(render 'shared/topbar') %>");
+  noty({
+    text: "Successfully logged up!",
+    type: 'success',
+    layout: 'topRight',
+    timeout: 2000
+  });
+<% else %>
+  noty({
+    text: "Invalid Email/Password",
+    type: 'error',
+    layout: 'topRight',
+    timeout: 2000
+  });
+<% end %>

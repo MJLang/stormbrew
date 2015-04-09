@@ -25,3 +25,14 @@ en:
     signup: 
       fail: 'Error signing up!'
       success: 'Welcome, %{username}'
+  topbar:
+    profile:
+      title: 'Hello %{username}'
+      profile: 'Profile'
+      logout: 'Logout'
+  sessions:
+    signup:
+      modal:
+        display_name: 'Display Name'
+        email: 'Email'
+        password: 'Password'
